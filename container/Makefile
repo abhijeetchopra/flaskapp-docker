@@ -1,6 +1,9 @@
 .PHONY: init
 init:
 		@echo "ERROR: no Makefile target selected"
+		@echo ""
+		@echo "USAGE: make [list, build, start, stop, remove, clean]"
+		@echo ""
 		@exit 1
 
 .PHONY: list
@@ -17,7 +20,13 @@ list:
 .PHONY: build
 build:
 		@# build container
-		VERSION=$$(cat VERSION); docker build -t flask_webapp:$$VERSION .;
+		FILE_VERSION=$$(cat VERSION); \
+		echo "Enter version to build...(leave blank to read from VERSION file)"; \
+		read READ_VERSION; \
+		echo $$READ_VERSION; \
+		echo $$FILE_VERSION; \
+		VERSION=$${READ_VERSION:-$$FILE_VERSION}; \
+		docker build -t flask_webapp:$$VERSION .;
 
 .PHONY: start
 start:
