@@ -31,7 +31,13 @@ build:
 .PHONY: start
 start:
 		@# start container
-		VERSION=$$(cat VERSION); docker run -d -p 8000:8000 flask_webapp:$$VERSION;
+		FILE_VERSION=$$(cat VERSION); \
+		echo "Enter version to start...(leave blank to read from VERSION file)"; \
+		read READ_VERSION; \
+		echo $$READ_VERSION; \
+		echo $$FILE_VERSION; \
+		VERSION=$${READ_VERSION:-$$FILE_VERSION}; \
+		docker run -d -p 8000:8000 flask_webapp:$$VERSION;
 		@echo "visit http://localhost:8000" && echo ""
 
 .PHONY: stop
