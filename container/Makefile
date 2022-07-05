@@ -21,7 +21,7 @@ list:
 build:
 		@# build container
 		FILE_VERSION=$$(cat VERSION); \
-		echo "Enter version to build...(leave blank to read from VERSION file)"; \
+		echo "Enter version to build...(leave blank to read from VERSION file which currently is: $$FILE_VERSION)"; \
 		read READ_VERSION; \
 		echo $$READ_VERSION; \
 		echo $$FILE_VERSION; \
